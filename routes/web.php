@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\frontend\FrontEndController;
+use App\Http\Controllers\backend\BackEndController;
+use App\Http\Controllers\backend\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', [FrontEndController::class, 'index'])->name('frontend.index');
+
+Route::post('/withdraw', [TransactionController::class, 'withdraw'])->name('transaction.withdraw');

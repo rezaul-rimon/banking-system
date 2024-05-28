@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('account_type', ['individual', 'biusiness']);
-            $table->decimal('balance', 12, 2);
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedBigInteger('user_id');
+            $table->enum('transaction_type', ['deposit', 'withdraw']);
+            $table->decimal('amount', 12, 2);
+            $table->decimal('fee', 6, 2);
+            $table->date('date');
             $table->timestamps();
-        });        
+        });
+        
     }
 
     /**
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('transactions');
     }
 };
